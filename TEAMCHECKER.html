@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Intramurals Team Checker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .navbar {
+      width: 100%;
+      background: #f5f5f5;
+      color: #333;
+      padding: 15px 30px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+      border-bottom: 4px solid transparent;
+      background-image: linear-gradient(#f5f5f5, #f5f5f5), linear-gradient(90deg, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff, #e0bbff);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+    }
+    .nav-content h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+      color: #666;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .nav-btn {
+      padding: 8px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .nav-btn:hover {
+      transform: translateY(-2px);
+    }
+    .nav-btn-signup {
+      background: #ffb3ba;
+      color: #333;
+    }
+    .nav-btn-checker {
+      background: #baffc9;
+      color: #333;
+    }
+    .nav-btn-players {
+      background: #bae1ff;
+      color: #333;
+    }
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+      background: #000;
+      color: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      margin-top: 80px;   /* leave room for the fixed header */
+    }
+    h1 {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #ccc;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    select, input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #444;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #111;
+      color: #eee;
+      transition: border-color 0.3s;
+    }
+    select:focus, input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 20px;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    #result {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      display: none;
+    }
+    #result.success {
+      display: block;
+      background: #d4edda;
+      color: #155724;
+      border: 2px solid #28a745;
+    }
+    #result.error {
+      display: block;
+      background: #f8d7da;
+      color: #721c24;
+      border: 2px solid #f5c6cb;
+    }
+    .team-info {
+      margin-top: 20px;
+      text-align: center;
+      display: none;
+    }
+    .team-info.show {
+      display: block;
+    }
+    .team-logo {
+      width: 300px;
+      height: 300px;
+      margin: 15px auto;
+      border-radius: 10px;
+      object-fit: contain;
+      padding: 10px;
+    }
+    .team-name {
+      font-size: 24px;
+      color: #fff;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .congrats {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-content">
+      <h2>Intramurals SY 2025-2026</h2>
+    </div>
+    <div class="nav-buttons">
+      <a href="signup.html" class="nav-btn nav-btn-signup">Sign Up</a>
+      <a href="TEAMCHECKER.html" class="nav-btn nav-btn-checker">Team Checker</a>
+      <a href="players.html" class="nav-btn nav-btn-players">Players</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Intramurals Team Checker</h1>
+  
+
+    <div class="form-group">
+      <label for="registered">Registered Online?</label>
+      <select id="registered">
+        <option value="">-- Select --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="medical">Medical Clearance?</label>
+      <select id="medical">
+        <option value="">-- Select --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="grade">Grade Level:</label>
+      <select id="grade">
+        <option value="">-- Select grade --</option>
+        <option value="7">Grade 7</option>
+        <option value="8">Grade 8</option>
+        <option value="9">Grade 9</option>
+        <option value="10">Grade 10</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="section">Section:</label>
+      <select id="section">
+        <option value="">-- Select Section --</option>
+        <option value="emerald">Emerald</option>
+        <option value="ruby">Ruby</option>
+        <option value="sapphire">Sapphire</option>
+        <option value="topaz">Topaz</option>
+      </select>
+    </div>
+
+    <button onclick="checkEligibility()">Check Eligibility</button>
+
+    <div id="result"></div>
+
+    <div class="team-info" id="teamInfo">
+      <img id="teamLogo" class="team-logo" src="" alt="Team Logo">
+      <div class="team-name" id="teamName"></div>
+    </div>
+  </div>
+
+  <script>
+    function checkEligibility() {
+      const registered = document.getElementById("registered").value;
+      const medical = document.getElementById("medical").value;
+      const gradeStr = document.getElementById("grade").value;
+      const grade = parseInt(gradeStr, 10);
+      const section = document.getElementById("section").value;
+      const result = document.getElementById("result");
+      const teamInfo = document.getElementById("teamInfo");
+
+      result.className = '';
+      teamInfo.classList.remove('show');
+
+      if (registered !== "yes") {
+        result.textContent = "❌ Please register online first.";
+        result.className = 'error';
+        return;
+      }
+      if (medical !== "yes") {
+        result.textContent = "❌ Please secure your medical clearance.";
+        result.className = 'error';
+        return;
+      }
+      if (!gradeStr || grade < 7 || grade > 10 || isNaN(grade)) {
+        result.textContent = "❌ Only Grades 7 to 10 are eligible.";
+        result.className = 'error';
+        return;
+      }
+      if (!section || !"emerald ruby sapphire topaz".split(" ").includes(section)) {
+        result.textContent = "❌ Please enter a valid section.";
+        result.className = 'error';
+        return;
+      }
+
+      const teams = {
+        emerald:   { name: "Green Hornets",   logo: "greenhornets.jpg" },
+        sapphire:  { name: "Blue Bears",      logo: "bluebears.jpg" },
+        ruby:      { name: "Red Bulldogs",    logo: "redbulldogs.jpg" },
+        topaz:     { name: "Yellow Tigers",   logo: "yellowtigers.jpg" },
+      };
+
+      const team = teams[section];
+
+      result.innerHTML =
+        `<div class="congrats">🎉 Congratulations! You are part of the ${team.name}.</div>`;
+      result.className = 'success';
+
+      document.getElementById("teamLogo").src = team.logo;
+      document.getElementById("teamName").textContent = team.name;
+      teamInfo.classList.add('show');
+    }
+  </script>
+
+</body>
+</html>
