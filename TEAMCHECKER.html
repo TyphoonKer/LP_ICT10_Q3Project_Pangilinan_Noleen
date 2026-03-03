@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Intramurals Team Checker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -17,60 +19,23 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
+      padding-top: 80px;
     }
     .navbar {
-      width: 100%;
-      background: #f5f5f5;
-      color: #333;
-      padding: 15px 30px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      z-index: 1000;
-      border-bottom: 4px solid transparent;
-      background-image: linear-gradient(#f5f5f5, #f5f5f5), linear-gradient(90deg, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff, #e0bbff);
-      background-origin: border-box;
-      background-clip: padding-box, border-box;
+      background: linear-gradient(90deg, #1352b0 0%, #0a990a 33%, #ffff48 66%, #b21111 100%) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
-    .nav-content h2 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: bold;
-      color: #666;
+    .navbar-brand img {
+      width: 60px;
+      height: 60px;
     }
-    .nav-buttons {
-      display: flex;
-      gap: 10px;
+    .navbar-nav .nav-link {
+      color: white !important;
+      font-weight: 500;
+      transition: opacity 0.3s;
     }
-    .nav-btn {
-      padding: 8px 20px;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.2s;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .nav-btn:hover {
-      transform: translateY(-2px);
-    }
-    .nav-btn-signup {
-      background: #ffb3ba;
-      color: #333;
-    }
-    .nav-btn-checker {
-      background: #baffc9;
-      color: #333;
-    }
-    .nav-btn-players {
-      background: #bae1ff;
-      color: #333;
+    .navbar-nav .nav-link:hover {
+      opacity: 0.8;
     }
     .container {
       width: 90%;
@@ -81,7 +46,6 @@
       padding: 40px;
       border-radius: 15px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-      margin-top: 80px;   /* leave room for the fixed header */
     }
     h1 {
       text-align: center;
@@ -190,16 +154,23 @@
 </head>
 <body>
 
-  <header class="navbar">
-    <div class="nav-content">
-      <h2>Intramurals SY 2025-2026</h2>
+  <nav class="navbar navbar-expand-md fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="SkillsTest.html">
+        <img src="OBLOGO.png" width="60" height="60" class="rounded-circle" alt="Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link" href="SkillsTest.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="TEAMCHECKER.html">Team Checker</a></li>
+          <li class="nav-item"><a class="nav-link" href="Players.html">Players</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="nav-buttons">
-      <a href="signup.html" class="nav-btn nav-btn-signup">Sign Up</a>
-      <a href="TEAMCHECKER.html" class="nav-btn nav-btn-checker">Team Checker</a>
-      <a href="players.html" class="nav-btn nav-btn-players">Players</a>
-    </div>
-  </header>
+  </nav>
 
   <div class="container">
     <h1>Intramurals Team Checker</h1>
@@ -255,6 +226,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     function checkEligibility() {
       const registered = document.getElementById("registered").value;
